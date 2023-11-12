@@ -49,12 +49,12 @@ const cpUpload = upload.fields([{ name: 'topicImage', maxCount: 1 }])
 
 
 router.route('/')
-            .get( verifyToken, allowedTo(userRoles.ADMIN , userRoles.MANAGER) , articleTopicController.getAllArticleTopics)
+            .get(articleTopicController.getAllArticleTopics)
             .post( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , cpUpload , validationSchemaArticleTopics()  , articleTopicController.addArticleTopic)
 
 
 router.route('/:articleTopicId')
-            .get( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , articleTopicController.getArticleTopicById)
+            .get(articleTopicController.getArticleTopicById)
             .patch( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) ,cpUpload , validationSchemaArticleTopics() , articleTopicController.updateArticleTopic)
             .delete( verifyToken , upload.none() , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , articleTopicController.deleteArticleTopic)
 

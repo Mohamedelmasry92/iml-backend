@@ -44,12 +44,12 @@ const cpUpload = upload.fields([{ name: 'categoryImage', maxCount: 1 }])
 
 
 router.route('/')
-            .get(verifyToken, allowedTo(userRoles.ADMIN , userRoles.MANAGER),courseTopicController.getAllCourseTopics)
+            .get(courseTopicController.getAllCourseTopics)
             .post(verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER),cpUpload,validationSchemaCourseTopics(),courseTopicController.addCourseTopic)
 
 
 router.route('/:courseTopicId')
-            .get(verifyToken,allowedTo(userRoles.ADMIN , userRoles.MANAGER) , courseTopicController.getCourseTopicById)
+            .get(courseTopicController.getCourseTopicById)
             .patch(verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) ,cpUpload, validationSchemaCourseTopics(),courseTopicController.updateCourseTopic)
             .delete(verifyToken , upload.none() , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , courseTopicController.deleteCourseTopic)
 

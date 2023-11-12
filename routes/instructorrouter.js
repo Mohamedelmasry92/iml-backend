@@ -49,12 +49,12 @@ const cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }])
 
 
 router.route('/')
-            .get( verifyToken, allowedTo(userRoles.ADMIN , userRoles.MANAGER) , instructorController.getAllInstructors)
+            .get(instructorController.getAllInstructors)
             .post( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , cpUpload , validationSchemaInstructor()   , instructorController.addInstructor)
 
 
 router.route('/:instructorId')
-            .get( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , instructorController.getInstructorById)
+            .get(instructorController.getInstructorById)
             .patch( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , cpUpload, validationSchemaInstructor() , instructorController.updateInstructor)
             .delete( verifyToken , upload.none() , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , instructorController.deleteInstructor)
 

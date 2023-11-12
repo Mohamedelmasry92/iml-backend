@@ -58,12 +58,12 @@ const cpUpload = upload.fields([{ name: 'coverImage', maxCount: 1 },{ name: 'vid
 
 
 router.route('/')
-            .get(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),coursesController.getAllCourses)
+            .get(coursesController.getAllCourses)
             .post(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),cpUpload,validationSchemaCourse(), coursesController.addCourse)
 
 
 router.route('/:courseId')
-            .get(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),coursesController.getCourseById)
+            .get(coursesController.getCourseById)
             .patch(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),cpUpload, validationSchemaCourse(),coursesController.updateCourse)
             .delete(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),coursesController.deleteCourse)
 

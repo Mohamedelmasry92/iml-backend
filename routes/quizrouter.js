@@ -10,12 +10,12 @@ const userRoles = require('../utils/userRoles');
 
 
 router.route('/')
-            .get(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),quizController.getAllQuiz)
+            .get(quizController.getAllQuiz)
             .post(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),quizController.addQuiz)
 
 
 router.route('/:quizId')
-            .get(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),quizController.getQuizById)
+            .get(quizController.getQuizById)
             .patch(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),quizController.updateQuiz)
             .delete(verifyToken,allowedTo(userRoles.ADMIN,userRoles.MANAGER),quizController.deleteQuiz)
 

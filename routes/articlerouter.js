@@ -49,12 +49,12 @@ const cpUpload = upload.fields([{ name: 'coverImage', maxCount: 1 }, { name: 'ar
 
 
 router.route('/')
-            .get( verifyToken, allowedTo(userRoles.ADMIN , userRoles.MANAGER) , articlesController.getAllArticles)
+            .get(articlesController.getAllArticles)
             .post( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , cpUpload , validationSchema()   , articlesController.addArticle)
 
 
 router.route('/:articleId')
-            .get( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , articlesController.getArticleById)
+            .get( articlesController.getArticleById)
             .patch( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , cpUpload, validationSchema() , articlesController.updateArticle)
             .delete( verifyToken , upload.none() , allowedTo(userRoles.ADMIN , userRoles.MANAGER) , articlesController.deleteArticle)
 
