@@ -49,7 +49,7 @@ router.route('/register').post( validatePassword, validationSchemaUser(),  userC
 router.route('/login').post( userController.login)
 
 router.route('/:userId')
-            .get( verifyToken , userController.getUserById)
+            .get( verifyToken , allowedTo(userRoles.ADMIN , userRoles.USER , userRoles.MANAGER), userController.getUserById)
             .patch( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER ,userRoles.USER) , validationSchemaUser(), userController.updateUser)
             .delete( verifyToken , allowedTo(userRoles.ADMIN , userRoles.MANAGER,userRoles.USER) , userController.deleteUser)
 
